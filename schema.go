@@ -42,16 +42,26 @@ func (s *Schema) MoveField(fromIndex, toIndex int) error {
 	return nil
 }
 
-func (s *Schema) ChangeFieldName(fieldIndex int, newName string) error {
+func (s *Schema) ChangeFieldName(oldName, newName string) error {
 	for _, f := range s.Fields {
 		if f.Name == newName {
 			return fmt.Errorf("field %s already exists", newName)
 		}
 	}
-	s.Fields[fieldIndex].Name = newName
-	return nil
+	for i, f := range s.Fields {
+		if f.Name == oldName {
+			s.Fields[i].Name = newName
+			return nil
+		}
+	}
+	return fmt.Errorf("field %s does not exist", oldName)
 }
 
-func (s *Schema) ChangeFieldType(fieldIndex int, newType string) {
-	s.Fields[fieldIndex].Type = newType
+func (s *Schema) ChangeFieldType(fieldName string, newType string) {
+	for i, f := range s.Fields {
+		if f.Name == fieldName {
+			s.Fields[i].Type = newType
+			return
+		}
+	}
 }
