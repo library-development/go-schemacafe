@@ -57,11 +57,12 @@ func (s *Schema) ChangeFieldName(oldName, newName string) error {
 	return fmt.Errorf("field %s does not exist", oldName)
 }
 
-func (s *Schema) ChangeFieldType(fieldName string, newType string) {
+func (s *Schema) ChangeFieldType(fieldName string, newType string) error {
 	for i, f := range s.Fields {
 		if f.Name == fieldName {
 			s.Fields[i].Type = newType
-			return
+			return nil
 		}
 	}
+	return fmt.Errorf("field %s does not exist", fieldName)
 }
