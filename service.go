@@ -21,7 +21,7 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		req := Request{}
 		json.NewDecoder(r.Body).Decode(&req)
-		ok, err := s.AuthClient.Validate(req.Auth)
+		ok, err := s.AuthClient.VerifyToken(req.Auth)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
