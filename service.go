@@ -32,7 +32,7 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 
 		event := Event{
-			Timestamp: time.Now().Unix(),
+			Timestamp: time.Now().UnixNano(),
 			UserID:    req.Auth.Email,
 			Command:   req.Command,
 			Input:     req.Input,
@@ -43,5 +43,9 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		schemasDir := filepath.Join(s.DataDir, "public/schemas")
+		err = ApplyEvent(schemasDir, &event)
+		ReportIfError(err)
 	}
 }
