@@ -2,6 +2,7 @@ package schemacafe
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"path/filepath"
 	"time"
@@ -17,6 +18,7 @@ type Service struct {
 func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
+		fmt.Println("test")
 		http.ServeFile(w, r, filepath.Join(s.DataDir, "public", r.URL.Path))
 	case "POST":
 		req := Request{}
