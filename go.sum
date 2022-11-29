@@ -1,0 +1,4 @@
+github.com/library-development/go-auth v0.0.0-20221128180038-e19c1905afab h1:mXOdV5mkutyM35ToMrHFhfOV+CNTT5hCACvof8/73EI=
+github.com/library-development/go-auth v0.0.0-20221128180038-e19c1905afab/go.mod h1:1pMPZxT/vorQe01DFrIzrn3Sx65Lulbc/Z+sB/4geSg=
+golang.org/x/crypto v0.3.0 h1:a06MkbcxBrEFc0w0QIZWXrH/9cCX6KJyWbBOIwAn+7A=
+golang.org/x/crypto v0.3.0/go.mod h1:hebNnKkNXi2UzZN1eVRvBB7co0a+JxK6XbPiWVs/3J4=
