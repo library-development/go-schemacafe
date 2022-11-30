@@ -2,7 +2,6 @@ package schemacafe
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"path/filepath"
 	"time"
@@ -18,7 +17,6 @@ type Service struct {
 func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		fmt.Println("test")
 		http.ServeFile(w, r, filepath.Join(s.DataDir, "public", r.URL.Path))
 	case "POST":
 		req := Request{}
@@ -39,15 +37,19 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Command:   req.Command,
 			Input:     req.Input,
 		}
+
+		schemasDir := filepath.Join(s.DataDir, "public/schemas")
+		err = ApplyEvent(schemasDir, &event)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
 		eventsDir := filepath.Join(s.DataDir, "public/events")
 		err = WriteEvent(eventsDir, &event)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
-		schemasDir := filepath.Join(s.DataDir, "public/schemas")
-		err = ApplyEvent(schemasDir, &event)
-		ReportIfError(err)
 	}
 }
