@@ -1,14 +1,18 @@
 package schemacafe
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/library-development/go-nameconv"
+)
 
 type Schema struct {
 	Fields []Field `json:"fields"`
 }
 
-func (s *Schema) AddField(name string, t Type) error {
+func (s *Schema) AddField(name nameconv.Name, t Type) error {
 	for _, f := range s.Fields {
-		if f.Name == name {
+		if f.Name.String() == name.String() {
 			return fmt.Errorf("field %s already exists", name)
 		}
 	}
@@ -19,9 +23,9 @@ func (s *Schema) AddField(name string, t Type) error {
 	return nil
 }
 
-func (s *Schema) RemoveField(name string) error {
+func (s *Schema) RemoveField(name nameconv.Name) error {
 	for i, f := range s.Fields {
-		if f.Name == name {
+		if f.Name.String() == name.String() {
 			s.Fields = append(s.Fields[:i], s.Fields[i+1:]...)
 			return nil
 		}
@@ -42,14 +46,14 @@ func (s *Schema) MoveField(fromIndex, toIndex int) error {
 	return nil
 }
 
-func (s *Schema) ChangeFieldName(oldName, newName string) error {
+func (s *Schema) ChangeFieldName(oldName, newName nameconv.Name) error {
 	for _, f := range s.Fields {
-		if f.Name == newName {
+		if f.Name.String() == newName.String() {
 			return fmt.Errorf("field %s already exists", newName)
 		}
 	}
 	for i, f := range s.Fields {
-		if f.Name == oldName {
+		if f.Name.String() == oldName.String() {
 			s.Fields[i].Name = newName
 			return nil
 		}
@@ -57,9 +61,9 @@ func (s *Schema) ChangeFieldName(oldName, newName string) error {
 	return fmt.Errorf("field %s does not exist", oldName)
 }
 
-func (s *Schema) ChangeFieldType(fieldName string, newType Type) error {
+func (s *Schema) ChangeFieldType(fieldName nameconv.Name, newType Type) error {
 	for i, f := range s.Fields {
-		if f.Name == fieldName {
+		if f.Name.String() == fieldName.String() {
 			s.Fields[i].Type = newType
 			return nil
 		}

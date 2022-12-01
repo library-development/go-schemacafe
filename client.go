@@ -5,6 +5,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/library-development/go-nameconv"
 )
 
 type Client struct {
@@ -35,10 +37,10 @@ func (c *Client) Get(path Path) *QueryResponse {
 				entry := FolderEntry{}
 				if strings.HasSuffix(name, "/") {
 					entry.Type = "folder"
-					entry.Name = name[:len(name)-1]
+					entry.Name = nameconv.ParseSnakeCase(strings.TrimSuffix(name, "/"))
 				} else {
 					entry.Type = "schema"
-					entry.Name = name
+					entry.Name = nameconv.ParseSnakeCase(name)
 				}
 				r.Folder.Contents = append(r.Folder.Contents, entry)
 			}

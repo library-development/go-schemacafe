@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+
+	"github.com/library-development/go-nameconv"
 )
 
 func ApplyEvent(schemasDir string, e *Event) error {
@@ -66,7 +68,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.AddField(fieldName, ParseType(fieldType))
+		err = schema.AddField(nameconv.ParseEnglish(fieldName), ParseType(fieldType))
 		if err != nil {
 			return err
 		}
@@ -81,7 +83,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.RemoveField(fieldName)
+		err = schema.RemoveField(nameconv.ParseEnglish(fieldName))
 		if err != nil {
 			return err
 		}
@@ -119,7 +121,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.ChangeFieldName(oldName, newName)
+		err = schema.ChangeFieldName(nameconv.ParseEnglish(oldName), nameconv.ParseEnglish(newName))
 		if err != nil {
 			return err
 		}
@@ -135,7 +137,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.ChangeFieldType(fieldName, ParseType(newType))
+		err = schema.ChangeFieldType(nameconv.ParseEnglish(fieldName), ParseType(newType))
 		if err != nil {
 			return err
 		}
