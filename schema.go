@@ -6,7 +6,7 @@ type Schema struct {
 	Fields []Field `json:"fields"`
 }
 
-func (s *Schema) AddField(name, t string) error {
+func (s *Schema) AddField(name string, t Type) error {
 	for _, f := range s.Fields {
 		if f.Name == name {
 			return fmt.Errorf("field %s already exists", name)
@@ -57,7 +57,7 @@ func (s *Schema) ChangeFieldName(oldName, newName string) error {
 	return fmt.Errorf("field %s does not exist", oldName)
 }
 
-func (s *Schema) ChangeFieldType(fieldName string, newType string) error {
+func (s *Schema) ChangeFieldType(fieldName string, newType Type) error {
 	for i, f := range s.Fields {
 		if f.Name == fieldName {
 			s.Fields[i].Type = newType

@@ -66,7 +66,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.AddField(fieldName, fieldType)
+		err = schema.AddField(fieldName, ParseType(fieldType))
 		if err != nil {
 			return err
 		}
@@ -135,7 +135,7 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.ChangeFieldType(fieldName, newType)
+		err = schema.ChangeFieldType(fieldName, ParseType(newType))
 		if err != nil {
 			return err
 		}
