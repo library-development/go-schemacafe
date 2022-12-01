@@ -15,7 +15,7 @@ type Client struct {
 
 func (c *Client) Get(path Path) *QueryResponse {
 	r := &QueryResponse{}
-	resp, err := http.Get(c.APIURL + path.String())
+	resp, err := http.Get(c.APIURL + "/schemas" + path.String())
 	if err != nil {
 		return r
 	}
@@ -29,6 +29,7 @@ func (c *Client) Get(path Path) *QueryResponse {
 	}
 	if strings.HasPrefix(string(b), "<pre>") {
 		r.IsFolder = true
+		r.Folder = &Folder{}
 		lines := strings.Split(string(b), "\n")
 		for _, line := range lines {
 			if strings.HasPrefix(line, "<a href=\"") {
@@ -46,6 +47,7 @@ func (c *Client) Get(path Path) *QueryResponse {
 			}
 		}
 	} else {
+		r.Schema = &Schema{}
 		err = json.Unmarshal(b, r.Schema)
 		if err != nil {
 			return r
