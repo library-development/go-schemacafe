@@ -22,5 +22,19 @@ func (p Path) Length() int {
 }
 
 func (p Path) Last() nameconv.Name {
+	if p.Length() < 1 {
+		return nil
+	}
 	return p[len(p)-1]
+}
+
+func (p Path) Append(name nameconv.Name) Path {
+	return append(p, name)
+}
+
+func (p Path) SecondLast() nameconv.Name {
+	if p.Length() < 2 {
+		return nil
+	}
+	return p[len(p)-2]
 }

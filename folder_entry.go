@@ -1,6 +1,8 @@
 package schemacafe
 
+import "github.com/library-development/go-nameconv"
+
 type FolderEntry struct {
-	Name string `json:"name"`
-	Type string `json:"type"`
+	Name nameconv.Name `json:"name"`
+	Type string        `json:"type"`
 }

@@ -11,9 +11,9 @@ type Client struct {
 	APIURL string
 }
 
-func (c *Client) Get(path string) *QueryResponse {
+func (c *Client) Get(path Path) *QueryResponse {
 	r := &QueryResponse{}
-	resp, err := http.Get(c.APIURL + path)
+	resp, err := http.Get(c.APIURL + path.String())
 	if err != nil {
 		return r
 	}

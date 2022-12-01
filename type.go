@@ -9,7 +9,7 @@ type Type struct {
 	BaseType  Identifier `json:"baseType"`
 }
 
-func (t *Type) Golang() string {
+func (t *Type) Golang(currentPackage Path) string {
 	var buf bytes.Buffer
 
 	if t.IsPointer {
@@ -24,7 +24,7 @@ func (t *Type) Golang() string {
 		buf.WriteString("map[string]")
 	}
 
-	buf.WriteString(t.BaseType.Golang())
+	buf.WriteString(t.BaseType.Golang(currentPackage))
 
 	return buf.String()
 }
