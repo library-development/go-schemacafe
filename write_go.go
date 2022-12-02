@@ -15,7 +15,8 @@ func WriteGo(from Path, to string) error {
 
 	if r.IsFolder {
 		fmt.Println(" folder found")
-		fmt.Printf("Making sure directory %s exists...", to)
+
+		fmt.Printf("Creating folder...")
 		err := os.MkdirAll(to, 0755)
 		if err != nil {
 			return err
