@@ -20,3 +20,7 @@ func (i *Identifier) Golang(currentPackage Path) string {
 		return id + "." + i.Name.PascalCase()
 	}
 }
+
+func (i *Identifier) Typescript() string {
+	return "I" + i.Name.PascalCase()
+}
