@@ -28,3 +28,20 @@ func (t *Type) Golang(currentPackage Path) string {
 
 	return buf.String()
 }
+
+func (t *Type) Typescript() string {
+	var buf bytes.Buffer
+
+	if t.IsArray {
+		buf.WriteString(t.BaseType.Typescript())
+		buf.WriteString("[]")
+	} else if t.IsMap {
+		buf.WriteString("{[key: string]: ")
+		buf.WriteString(t.BaseType.Typescript())
+		buf.WriteString("}")
+	} else {
+		buf.WriteString(t.BaseType.Typescript())
+	}
+
+	return buf.String()
+}
