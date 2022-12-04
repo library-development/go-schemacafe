@@ -2,6 +2,7 @@ package schemacafe
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"path/filepath"
 	"sync"
@@ -25,6 +26,7 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		json.NewDecoder(r.Body).Decode(&req)
 		ok, err := s.AuthClient.VerifyToken(req.Auth)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -54,6 +56,7 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		eventsDir := filepath.Join(s.DataDir, "public/events")
 		err = WriteEvent(eventsDir, &event)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -62,26 +65,31 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		version := tsTypesVersion(tsDir)
 		err = emptyGitDir(tsDir)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = WriteTypescript(Path{}, tsDir)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		newVersion, err := incrementVersion(version)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = writeTSTypesRepoFiles(tsDir, newVersion)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = gitCommitAndPush(tsDir, &event)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
