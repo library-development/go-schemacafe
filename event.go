@@ -9,6 +9,7 @@ type Event struct {
 	UserID    string            `json:"userId"`
 	Timestamp int64             `json:"timestamp"`
 	Command   string            `json:"command"`
+	Context   string            `json:"context"`
 	Input     map[string]string `json:"input"`
 }
 

@@ -40,6 +40,7 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Timestamp: time.Now().UnixNano(),
 			UserID:    req.Auth.Email,
 			Command:   req.Command,
+			Context:   req.Context,
 			Input:     req.Input,
 		}
 
