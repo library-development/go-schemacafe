@@ -1,26 +1,21 @@
 package schemacafe
 
-import (
-	"github.com/library-development/go-nameconv"
-)
-
 type Identifier struct {
-	Path Path          `json:"path"`
-	Name nameconv.Name `json:"name"`
+	Path Path `json:"path"`
 }
 
 func (i *Identifier) Golang(currentPackage Path) string {
 	if i.Path.Length() == 0 {
-		return i.Name.PascalCase()
+		panic("identifier has no path")
 	}
 	id := i.Path.Last().AllLowerNoSpaces()
-	if i.Path.String() == currentPackage.String() {
-		return i.Name.PascalCase()
+	if i.Path.Pop().String() == currentPackage.String() {
+		return i.Path.Last().PascalCase()
 	} else {
-		return id + "." + i.Name.PascalCase()
+		return id + "." + i.Path.Last().PascalCase()
 	}
 }
 
 func (i *Identifier) Typescript() string {
-	return "I" + i.Name.PascalCase()
+	return "I" + i.Path.Last().PascalCase()
 }

@@ -43,7 +43,7 @@ func WriteTypescript(from Path, to string) error {
 		imports := map[string]string{}
 		for _, field := range r.Schema.Fields {
 			if field.Type.BaseType.Path.Length() > 0 {
-				importPath := "@schema.cafe/types" + field.Type.BaseType.Path.String() + "/" + field.Type.BaseType.Name.SnakeCase()
+				importPath := "@schema.cafe/types" + field.Type.BaseType.Path.String() + "/" + field.Type.BaseType.Path.Last().SnakeCase()
 				name := field.Type.BaseType.Typescript()
 				if n, ok := imports[importPath]; ok && n != name {
 					// TODO: handle this

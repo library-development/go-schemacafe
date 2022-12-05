@@ -38,3 +38,7 @@ func (p Path) SecondLast() nameconv.Name {
 	}
 	return p[len(p)-2]
 }
+
+func (p Path) Pop() Path {
+	return p[:len(p)-1]
+}

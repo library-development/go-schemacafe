@@ -9,7 +9,7 @@ import (
 func ParseType(s string) Type {
 	t := Type{
 		BaseType: Identifier{
-			Name: nameconv.Name{"string"},
+			Path: []nameconv.Name{{"string"}},
 		},
 	}
 	json.Unmarshal([]byte(s), &t)
