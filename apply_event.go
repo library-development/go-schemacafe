@@ -68,7 +68,11 @@ func ApplyEvent(schemasDir string, e *Event) error {
 		if err != nil {
 			return err
 		}
-		err = schema.AddField(nameconv.ParseEnglish(fieldName), ParseType(fieldType))
+		n, err := nameconv.ParseEnglish(fieldName)
+		if err != nil {
+			return err
+		}
+		err = schema.AddField(n, ParseType(fieldType))
 		if err != nil {
 			return err
 		}
