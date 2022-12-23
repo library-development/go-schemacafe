@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 func WriteGo(from Path, to string) error {

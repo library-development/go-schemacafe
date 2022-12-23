@@ -1,3 +1,3 @@
-module github.com/library-development/go-schemacafe
+module lib.dev/schemacafe
 
 go 1.19

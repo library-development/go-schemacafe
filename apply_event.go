@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 func ApplyEvent(schemasDir string, e *Event) error {

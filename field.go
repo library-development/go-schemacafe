@@ -1,6 +1,6 @@
 package schemacafe
 
-import "github.com/library-development/go-nameconv"
+import "lib.dev/nameconv"
 
 type Field struct {
 	Name nameconv.Name `json:"name"`

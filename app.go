@@ -1,6 +1,6 @@
 package schemacafe
 
-import "github.com/library-development/go-web"
+import "lib.dev/web"
 
 var app = web.App{
 	Models: []web.Model{

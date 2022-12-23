@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 type Client struct {

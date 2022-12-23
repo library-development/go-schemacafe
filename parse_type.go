@@ -3,7 +3,7 @@ package schemacafe
 import (
 	"encoding/json"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 func ParseType(s string) Type {

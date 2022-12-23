@@ -1,6 +1,6 @@
 package schemacafe
 
-import "github.com/library-development/go-marketing"
+import "lib.dev/marketing"
 
 var Marketing struct {
 	HomePage *marketing.LandingPage

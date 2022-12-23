@@ -3,7 +3,7 @@ package schemacafe
 import (
 	"strings"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 type Path []nameconv.Name

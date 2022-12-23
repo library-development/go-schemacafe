@@ -3,7 +3,7 @@ package schemacafe
 import (
 	"fmt"
 
-	"github.com/library-development/go-nameconv"
+	"lib.dev/nameconv"
 )
 
 type Schema struct {
